@@ -1,5 +1,11 @@
+# README.txt
+
 El fichero se adjunta a la entrega realizado con git como se solicitó.
 No obstante, no sé incluir los commits en el ZIP y por lo que he estado investigando no se pueden incluir estos metadatos directamente.
+
+Para la solución propuesta 2, se incluye otra función de código, bajo el nombre insertaAsignatura_v2
+
+## Repositorio
 
 Le remito la ruta al repositorio público en el que he realizado esta entrega:
 
