@@ -15,40 +15,71 @@ create or replace procedure insertaAsignatura(
 begin
 
   -- Inserto tabla de asignaturas con los parámetros de entrada dados
- INSERT INTO asignaturas VALUES (
-  v_idAsignatura,
-  v_nombreAsig,
-  v_titulacion,
-  v_ncreditos
- );
+  INSERT INTO asignaturas VALUES (
+    v_idAsignatura,
+    v_nombreAsig,
+    v_titulacion,
+    v_ncreditos
+  );
 
- EXCEPTION
-  -- Capturo y manejo las excepciones
-  WHEN DUP_VAL_ON_INDEX THEN
-    -- OPCION DE SOLUCIÓN 1
-    -- Verifico si es por clave primaria o por clave única
-    DECLARE
-      count_registros INTEGER;
-    BEGIN
-      -- Busco si es violación de clave primaria, es decir que ya había un registro con esos datos id+titulacion
-      SELECT COUNT(*) INTO count_registros
-      FROM asignaturas
-      WHERE idAsignatura = v_idAsignatura AND titulacion = v_titulacion;
+  exception
+    -- Capturo y manejo las excepciones
+    WHEN DUP_VAL_ON_INDEX THEN
+      -- OPCION DE SOLUCIÓN 1
+      -- Verifico si es por clave primaria o por clave única
+      DECLARE
+        count_registros INTEGER;
+      BEGIN
+        -- Busco si es violación de clave primaria, es decir que ya había un registro con esos datos id+titulacion
+        SELECT COUNT(*) INTO count_registros
+        FROM asignaturas
+        WHERE idAsignatura = v_idAsignatura AND titulacion = v_titulacion;
 
-      -- Si hay un registro, es violación de clave primaria, sino de nombre
-      IF count_registros > 0 THEN
-        -- Violación de clave primaria
-        RAISE_APPLICATION_ERROR(-20000, 'La asignatura con idAsignatura='||v_idAsignatura||' esta repetida en la titulacion '||v_titulacion||'.');
-      ELSE
-        -- por descarte, violación de restricción única
-        RAISE_APPLICATION_ERROR(-20001, 'La asignatura con nombre='||v_nombreAsig||' esta repetida en la titulacion '||v_titulacion||'.');
-      END IF;
-    END;
-  END;
+        -- Si hay un registro, es violación de clave primaria, sino de nombre
+        IF count_registros > 0 THEN
+          -- Violación de clave primaria
+          RAISE_APPLICATION_ERROR(-20000, 'La asignatura con idAsignatura='||v_idAsignatura||' esta repetida en la titulacion '||v_titulacion||'.');
+        ELSE
+          -- por descarte, violación de restricción única
+          RAISE_APPLICATION_ERROR(-20001, 'La asignatura con nombre='||v_nombreAsig||' esta repetida en la titulacion '||v_titulacion||'.');
+        END IF;
+      END;
+  end;
 
-end;
+end insertaAsignatura;
 /
 
+-- IMPLEMENTAMOS LA VERSIÓN 2 DE LA SOLUCIÓN
+create or replace procedure insertaAsignatura_v2(
+  v_idAsignatura integer, v_nombreAsig varchar, v_titulacion varchar, v_ncreditos integer) is
+begin
+
+  -- Inserto tabla de asignaturas con los parámetros de entrada dados
+  INSERT INTO asignaturas VALUES (
+    v_idAsignatura,
+    v_nombreAsig,
+    v_titulacion,
+    v_ncreditos
+  );
+
+ exception
+    -- Capturo y manejo las excepciones
+    WHEN DUP_VAL_ON_INDEX THEN
+      -- OPCION DE SOLUCIÓN 2
+      BEGIN
+        -- Miramos la variable de sistema SQLERRM para ver el código que nos ha dejado ahí
+        IF SQLERRM LIKE '%PK_Asignaturas%' THEN
+          -- Violación de clave primaria
+          RAISE_APPLICATION_ERROR(-20000, 'La asignatura con idAsignatura='||v_idAsignatura||' esta repetida en la titulacion '||v_titulacion||'.');
+        ELSE
+          -- por descarte, violación de restricción única
+          RAISE_APPLICATION_ERROR(-20001, 'La asignatura con nombre='||v_nombreAsig||' esta repetida en la titulacion '||v_titulacion||'.');
+        END IF;
+      END;
+  end;
+
+end insertaAsignatura;
+/
 
 --juego de pruebas automáticas
 create or replace procedure test_asignaturas is
