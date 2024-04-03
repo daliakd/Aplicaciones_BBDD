@@ -13,7 +13,13 @@ create or replace procedure insertaAsignatura(
   v_idAsignatura integer, v_nombreAsig varchar, v_titulacion varchar, v_ncreditos integer) is
 
 begin
-  null; --El null es para que compile. Sustituyelo por la implementación de la tansacción.
+ INSERT INTO asignaturas VALUES (
+  v_idAsignatura,
+  v_nombreAsig,
+  v_titulacion,
+  v_ncreditos
+ )
+ 
 end;
 /
 
