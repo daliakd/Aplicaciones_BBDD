@@ -84,6 +84,7 @@ create or replace procedure crearViaje( m_idRecorrido int, m_idAutocar int, m_fe
   count_autocares INTEGER;
   count_autocar_reservado INTEGER;
   count_viajes INTEGER;
+  n_plazas INTEGER;
 begin
   -- REQUISITO 1 ------------------------------------
 
@@ -105,15 +106,23 @@ begin
     RAISE_APPLICATION_ERROR(-20003, 'AUTOCAR_OCUPADO');
   END IF;
 
-  -- Buscto si ya hay un viaje para el recorrido y fecha dados
+  -- Busco si ya hay un viaje para el recorrido y fecha dados
   SELECT COUNT(*) INTO count_viajes FROM viajes WHERE idRecorrido = m_idRecorrido AND fecha = m_fecha;
   IF count_viajes>0 THEN
     RAISE_APPLICATION_ERROR(-20004, 'VIAJE_DUPLICADO');
   END IF;
 
   -- REQUISITO 2 ------------------------------------
-  insert into viajes (idViaje, idAutocar, idRecorrido, fecha, Conductor)
-  values (seq_viajes.nextval, m_idAutocar, m_idRecorrido, m_fecha, m_conductor);
+  SELECT nplazas INTO n_plazas FROM modelos WHERE 
+    idModelo = (SELECT modelo FROM autocares WHERE idAutocar = m_idAutocar)
+
+  -- Si no tiene modelo, pongo por defecto n_plazas=25
+  IF n_plazas IS null THEN
+      n_plazas := 25;
+  AND IF;
+
+  insert into viajes (idViaje, idAutocar, idRecorrido, fecha, nPlazasLibres, Conductor)
+  values (seq_viajes.nextval, m_idAutocar, m_idRecorrido, m_fecha, n_plazas, m_conductor);
 
 end;
 /
