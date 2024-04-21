@@ -80,9 +80,38 @@ commit;
 
 
 create or replace procedure crearViaje( m_idRecorrido int, m_idAutocar int, m_fecha date, m_conductor varchar) is
-
+  count_recorridos INTEGER;
+  count_autocares INTEGER;
+  count_autocar_reservado INTEGER;
+  count_viajes INTEGER;
 begin
-    null; -- Retira el null y rellena el procedimiento
+  -- REQUISITO 1 ------------------------------------
+
+  -- Busco si hay un recorrido con el id dado
+  SELECT COUNT(*) INTO count_recorridos FROM recorridos WHERE idRecorrido = m_idRecorrido;
+  IF count_recorridos = 0 THEN
+    RAISE_APPLICATION_ERROR(-20001, 'RECORRIDO_INEXISTENTE');
+  END IF;
+
+  -- Busco si hay un autocar con el id dado
+  SELECT COUNT(*) INTO count_autocares FROM autocares WHERE idAutocar = m_idAutocar;               
+  IF count_autocares=0 THEN
+    RAISE_APPLICATION_ERROR(-20002, 'AUTOCAR_INEXISTENTE');
+  END IF;
+
+  -- Busco si el autocar ya tiene un viaje para la fecha dada (está ocupado)
+  SELECT COUNT(*) INTO count_autocar_reservado FROM viajes WHERE idAutocar = m_idAutocar AND fecha = m_fecha;
+  IF count_autocar_reservado>0 THEN
+    RAISE_APPLICATION_ERROR(-20003, 'AUTOCAR_OCUPADO');
+  END IF;
+
+  -- Buscto si ya hay un viaje para el recorrido y fecha dados
+  SELECT COUNT(*) INTO count_viajes FROM viajes WHERE idRecorrido = m_idRecorrido AND fecha = m_fecha;
+  IF count_viajes>0 THEN
+    RAISE_APPLICATION_ERROR(-20004, 'VIAJE_DUPLICADO');
+  END IF;
+
+
 end;
 /
 
