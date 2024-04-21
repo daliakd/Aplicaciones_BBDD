@@ -113,11 +113,13 @@ begin
   END IF;
 
   -- REQUISITO 4
-  SELECT nplazas INTO n_plazas FROM modelos WHERE 
-    idModelo = (SELECT modelo FROM autocares WHERE idAutocar = m_idAutocar);
+  SELECT m.nplazas INTO n_plazas 
+  FROM autocares a
+  LEFT JOIN modelos m ON a.modelo = m.idModelo
+  WHERE a.idAutocar = m_idAutocar;
 
   -- Si no tiene modelo, pongo por defecto n_plazas=25
-  IF n_plazas IS null THEN
+  IF n_plazas IS NULL THEN
       n_plazas := 25;
   END IF;
 
@@ -192,7 +194,7 @@ begin
   end;
   
   
-  --Caso 4: Crea un viaje OK
+  --Caso 5: Crea un viaje OK
   begin
     crearViaje(1, 1, trunc(current_date)+3, 'Pedrito');
     dbms_output.put_line('Parece OK Crea un viaje válido');
@@ -202,7 +204,7 @@ begin
   end;
   
   
-  --Caso 5: Crea un viaje OK con autcar sin modelo
+  --Caso 6: Crea un viaje OK con autcar sin modelo
   begin
     crearViaje(1, 4, trunc(current_date)+4, 'Jorgito');
     dbms_output.put_line('Parece OK Crea un viaje válido sin modelo');
