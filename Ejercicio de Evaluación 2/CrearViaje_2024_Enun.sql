@@ -100,7 +100,7 @@ begin
     RAISE_APPLICATION_ERROR(-20002, 'AUTOCAR_INEXISTENTE');
   END IF;
 
-  -- Busco si el autocar ya tiene un viaje para la fecha dada (est· ocupado)
+  -- Busco si el autocar ya tiene un viaje para la fecha dada (est√° ocupado)
   SELECT COUNT(*) INTO count_autocar_reservado FROM viajes WHERE idAutocar = m_idAutocar AND fecha = m_fecha;
   IF count_autocar_reservado>0 THEN
     RAISE_APPLICATION_ERROR(-20003, 'AUTOCAR_OCUPADO');
@@ -112,17 +112,20 @@ begin
     RAISE_APPLICATION_ERROR(-20004, 'VIAJE_DUPLICADO');
   END IF;
 
-  -- REQUISITO 2 ------------------------------------
+  -- REQUISITO 4
   SELECT nplazas INTO n_plazas FROM modelos WHERE 
-    idModelo = (SELECT modelo FROM autocares WHERE idAutocar = m_idAutocar)
+    idModelo = (SELECT modelo FROM autocares WHERE idAutocar = m_idAutocar);
 
   -- Si no tiene modelo, pongo por defecto n_plazas=25
   IF n_plazas IS null THEN
       n_plazas := 25;
-  AND IF;
+  END IF;
 
+  -- REQUISITO 2 ------------------------------------
   insert into viajes (idViaje, idAutocar, idRecorrido, fecha, nPlazasLibres, Conductor)
   values (seq_viajes.nextval, m_idAutocar, m_idRecorrido, m_fecha, n_plazas, m_conductor);
+
+  commit;
 
 end;
 /
@@ -192,20 +195,20 @@ begin
   --Caso 4: Crea un viaje OK
   begin
     crearViaje(1, 1, trunc(current_date)+3, 'Pedrito');
-    dbms_output.put_line('Parece OK Crea un viaje v·lido');
+    dbms_output.put_line('Parece OK Crea un viaje v√°lido');
   exception
     when others then
-        dbms_output.put_line('MAL Crea un viaje v·lido: '||sqlerrm);
+        dbms_output.put_line('MAL Crea un viaje v√°lido: '||sqlerrm);
   end;
   
   
   --Caso 5: Crea un viaje OK con autcar sin modelo
   begin
     crearViaje(1, 4, trunc(current_date)+4, 'Jorgito');
-    dbms_output.put_line('Parece OK Crea un viaje v·lido sin modelo');
+    dbms_output.put_line('Parece OK Crea un viaje v√°lido sin modelo');
   exception
     when others then
-        dbms_output.put_line('MAL Crea un viaje v·lido sin modelo: '||sqlerrm);
+        dbms_output.put_line('MAL Crea un viaje v√°lido sin modelo: '||sqlerrm);
   end;
   
   
@@ -224,7 +227,7 @@ begin
     FROM viajes;
     
     if varContenidoReal=varContenidoEsperado then
-      dbms_output.put_line('OK: SÌ que modifica bien la BD.'); 
+      dbms_output.put_line('OK: S√≠ que modifica bien la BD.'); 
     else
       dbms_output.put_line('Mal no modifica bien la BD.'); 
       dbms_output.put_line('Contenido real:     '||varContenidoReal); 
