@@ -111,6 +111,9 @@ begin
     RAISE_APPLICATION_ERROR(-20004, 'VIAJE_DUPLICADO');
   END IF;
 
+  -- REQUISITO 2 ------------------------------------
+  insert into viajes (idViaje, idAutocar, idRecorrido, fecha, Conductor)
+  values (seq_viajes.nextval, m_idAutocar, m_idRecorrido, m_fecha, m_conductor);
 
 end;
 /
