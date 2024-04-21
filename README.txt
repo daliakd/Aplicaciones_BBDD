@@ -1,12 +1,19 @@
 # README.txt
 
-El fichero se adjunta a la entrega realizado con git como se solicitó.
-No obstante, no sé incluir los commits en el ZIP y por lo que he estado investigando no se pueden incluir estos metadatos directamente.
+## Opción 1: Bundle
+Se incluye un fichero bundle para poder ser clonado y así ver el histórico de commits de la práctica.
+Para su clonado, simplemente ejecutar dentro del zip:
 
-Para la solución propuesta 2, se incluye otra función de código, bajo el nombre insertaAsignatura_v2
+```
+git clone ejercicioEvaluacion2.bundle evaluando_DaliaKassemDoctor
+```
 
-## Repositorio
+## Opción 2: Commit history en un txt
+Adicionalmente, se incluye un fichero "commits.txt" dentro del zip que incluye la salida del comando "git log" para esta práctica.
 
-Le remito la ruta al repositorio público en el que he realizado esta entrega:
+
+## Opción 3: Repositorio
+Le remito la ruta al repositorio (público) en el que he realizado esta entrega:
 
 https://github.com/daliakd/Aplicaciones_BBDD
+https://github.com/daliakd/Aplicaciones_BBDD/tree/main/Ejercicio%20de%20Evaluaci%C3%B3n%202

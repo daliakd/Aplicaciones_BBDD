@@ -1,0 +1,77 @@
+commit 3c178cb6d4ea37cfb4d2888ab88e1b684860332c
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Mon Apr 22 00:22:21 2024 +0200
+
+    fix: change number test
+
+commit 39dbd99ce62f524c044744b9bcf75b6cfadbcbfe
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Sun Apr 21 23:31:12 2024 +0200
+
+    feat: reorganización y commit en código
+
+commit c320a7c882df0e659b885529d823bfd9eccbd5a4
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Sun Apr 21 20:54:07 2024 +0200
+
+    fix: tomar nplazas del modelo
+
+commit a5a92b543667f22c510c9553c85489f4bf279747
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Sun Apr 21 20:40:27 2024 +0200
+
+    feat: Requisito 2. Crear el viaje
+
+commit 5dd8df5715a967a1ca63b0fa8065ec1f7aaef7f4
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Sun Apr 21 20:40:01 2024 +0200
+
+    feat: Requisito 1. Excepciones
+
+commit cbc0dad6502fec22fc15b002b04f2583f9c5abbc
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Sat Apr 20 23:44:41 2024 +0200
+
+    feat: enunciado y fichero apoyo
+
+commit 3693bbba2ec3cb224bac35d7731327d28acdae15
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Wed Apr 3 23:49:13 2024 +0200
+
+    feat: aclaraciones nuevas en readme
+
+commit 1fd42882a5ca026bfd85933640d7f1ddbfa1669d
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Wed Apr 3 23:47:06 2024 +0200
+
+    feat: versión 2 y corrección de errores
+
+commit cf831565eb1e87e73383038095b78bebb8897cf1
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Wed Apr 3 23:15:42 2024 +0200
+
+    feat: opción de solución 1
+
+commit b250d54662e47a39ca64d0aef48883f1b39d464d
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Wed Apr 3 22:50:53 2024 +0200
+
+    feat: Incluir README
+
+commit 30fdda5ffb92b740f2702ebc67f3d6c3e4e72f8c
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Wed Apr 3 20:13:01 2024 +0200
+
+    feat: Algoritmo. Apartado 1
+
+commit eb5478271724efab870d39d3ec9a53e61a138a5e
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Wed Apr 3 20:02:45 2024 +0200
+
+    feat: Crear estructura de asignatura por carpetas
+
+commit 9e7c1693dd9080deacc43e3f103e792def753c0e
+Author: Dalia Kassem Doctor <dkd1002@alu.ubu.es>
+Date:   Wed Apr 3 19:55:53 2024 +0200
+
+    feat: Enunciado ejercicio y pistas sql
